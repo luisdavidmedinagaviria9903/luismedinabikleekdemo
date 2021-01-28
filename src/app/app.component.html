@@ -2,6 +2,7 @@
   <div class="">Demo Luis medina Crud</div>
 </mat-toolbar>
 <mat-card class="row d-flex justify-content-center" >
+  <button class="btn" mat-raised-button color="green" (click)="openCreateCustomerModal()">Create customer</button>
   <table mat-table [dataSource]="dataSource">
 
             <div class="col-1">
@@ -62,11 +63,17 @@
               </ng-container>
             </div>
 
-            <div class="col-1">
-              <ng-container matColumnDef="actions">
+            <div class="col-3">
+              <ng-container matColumnDef="actions" class="d-flex justify-content-lg-end">
+                <tr>
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let element"> <button  mat-raised-button color="primary" (click)="openModal(element.document)">Update customer</button>
+                </tr>
+                <tr>
+                <td mat-cell *matCellDef="let element" >
+                  <button  mat-raised-button color="primary" (click)="openModal(element.id)" style="margin-right: 5px">Update</button>
+                  <button  mat-raised-button color="warn" (click)="deleteCustomer(element.id)">Delete</button>
                 </td>
+                </tr>
               </ng-container>
             </div>
 
@@ -77,7 +84,6 @@
           </table>
 
 </mat-card>
-<mat-paginator  [pageSizeOptions]="[10, 20, 30, 40 ]"  (page)="getPageEvent($event)" showFirstLastButtons ></mat-paginator>
 
 
 

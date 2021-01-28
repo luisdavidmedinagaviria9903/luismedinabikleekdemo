@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {RouterModule, Routes} from '@angular/router';
 
-import { MatIconRegistry } from '@angular/material/icon';
+
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,7 +27,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
-import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule } from '@angular/material/slider';
@@ -42,10 +42,13 @@ import { MatTreeModule } from '@angular/material/tree';
 import { HttpClientModule } from '@angular/common/http';
 import {UpdateFormComponent} from './components/update-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { CreateFormComponent } from './components/create-form.component';
+
+
 
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
+  {path: 'app', component: AppComponent},
 ];
 
 
@@ -53,7 +56,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    UpdateFormComponent
+    UpdateFormComponent,
+    CreateFormComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +101,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'es-CO'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

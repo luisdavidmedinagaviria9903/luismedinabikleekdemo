@@ -23,22 +23,26 @@ export class CustomerService {
 
 
 
-  startSearch(matPaginator: MatPaginator): any {
+  startSearch(): any {
 
-    console.log(matPaginator);
-    this.searchParameters.pageSize = matPaginator.pageSize;
-    this.searchParameters.pageNo = matPaginator.pageIndex;
+
+    this.searchParameters.pageSize = 10;
+    this.searchParameters.pageNo = 0;
 
     return this.http.post(this.urlEndPoint + 'customer/findAll', this.searchParameters, {headers: this.headers});
   }
 
 
-  findOne(document: string): any{
-    return this.http.get(this.urlEndPoint + 'customer/' + document);
+  findOne(id: number): any{
+    return this.http.get(this.urlEndPoint + 'customer/findOne/' + id);
   }
 
   save(customer: Customer): any {
     return this.http.post(this.urlEndPoint + 'customer/save', customer, {headers: this.headers});
+  }
+
+  deleteOne(id: number): any{
+    return this.http.get(this.urlEndPoint + 'customer/delete/' + id);
   }
 
 }

@@ -4,6 +4,8 @@ import {CustomerService} from '../service/customer.service';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Customer} from '../model/customer';
 import * as moment from 'moment';
+import {Moment} from 'moment';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class UpdateFormComponent implements OnInit {
   today = moment();
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private customerService: CustomerService, private fb: FormBuilder) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private customerService: CustomerService, private fb: FormBuilder, private router: Router) {
     this.customer = new  Customer();
     this.updatedCustomer = new Customer();
   }
@@ -43,7 +45,6 @@ export class UpdateFormComponent implements OnInit {
       firstName: new  FormControl(''),
       lastName: new  FormControl(''),
       mobile: new  FormControl(''),
-      birthDate: new  FormControl(''),
       age: new  FormControl(''),
       genderType: [''],
     });
@@ -58,7 +59,8 @@ export class UpdateFormComponent implements OnInit {
     this.updatedCustomer.secondName = this.customer.secondName;
     this.updatedCustomer.lastName = this.form.get('lastName').value;
     this.updatedCustomer.secondLastName = this.customer.secondLastName;
-    this.updatedCustomer.birthDate = moment(this.form.get('birthDate').value).format('YYYY-MM-DD');
+    this.updatedCustomer.mobile = this.form.get('mobile').value;
+    this.updatedCustomer.birthDate = this.customer.birthDate;
     this.updatedCustomer.genderType = this.form.get('genderType').value;
     this.updatedCustomer.creationDate = this.customer.creationDate;
     this.updatedCustomer.modifyDate = this.today.format('YYYY-MM-DD hh:mm:ss');
@@ -66,9 +68,10 @@ export class UpdateFormComponent implements OnInit {
     this.customerService.save(this.updatedCustomer).subscribe(response => {
       if (response != null){
         window.alert('Success: ' + JSON.stringify(response));
+        window.location.reload();
       }
     }, error => {
-      console.log(error);
+      window.alert('error: ' + JSON.stringify(error));
     });
   }
 }
