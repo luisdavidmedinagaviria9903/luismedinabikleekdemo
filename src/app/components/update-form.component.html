@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Update Customer</h2>
+<mat-dialog-content class="mat-typography">
+
+  <form  class="open-close-container" [formGroup]="form" (submit)="submit()">
+    <div class="col-12" style="padding: 20px">
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Document</mat-label>
+        <input matInput  formControlName="document" [value]="this.customer.document">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" [value]="this.customer.email" >
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName"  [value]="this.customer.firstName ">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3" >
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" [value]="this.customer.lastName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Mobile</mat-label>
+        <input matInput formControlName="mobile" [value]="this.customer.mobile">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Birthdate</mat-label>
+        <input matInput [matDatepicker]="datePicker"  formControlName="birthDate" [value]="this.customer.birthDate">
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Age</mat-label>
+        <input matInput  formControlName="age" [value]="this.customer.age">
+
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-3">
+        <mat-label>Gender type</mat-label>
+        <mat-select formControlName="genderType">
+          <mat-option [value]="this.customer.genderType">{{this.customer.genderType}}</mat-option>
+          <mat-option *ngIf="!(this.customer.genderType === 'MALE')" value="MALE">MALE</mat-option>
+          <mat-option *ngIf="!(this.customer.genderType === 'FEMALE')" value="FEMALE">FEMALE</mat-option>
+          <mat-option *ngIf="!(this.customer.genderType === 'OTHER')" value="OTHER">OTHER</mat-option>
+
+
+        </mat-select>
+      </mat-form-field>
+
+
+
+
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+      <button class="btn submit-button" type="submit" mat-raised-button color="primary">Update</button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+
